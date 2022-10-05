@@ -1,21 +1,12 @@
-#requires -version 4
-<#
-.SYNOPSIS
-  
-.DESCRIPTION
-  Removes pre-installed apps from Windows 10
-  Based on https://github.com/W4RH4WK/Debloat-Windows-10/blob/master/scripts/remove-default-apps.ps1
+#   Description:
+# This script removes unwanted Apps that come with Windows. If you  do not want
+# to remove certain Apps comment out the corresponding lines below.
 
-  Do the same for the new plan
+Import-Module -DisableNameChecking $PSScriptRoot\..\lib\take-own.psm1
+Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
 
-.NOTES
-  Version:        1.0
-  Author:         Alex Hirsch - http://w4rh4wk.github.io/
-                  Rudy Mens - https://LazyAdmin.nl
-  Creation Date:  4 aug 2015
-  Purpose/Change: Check if app exists on version
-                  Remove local app storage
-#>
+Write-Output "Elevating privileges for this process"
+do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
 
 Write-Output "Uninstalling default apps"
 $apps = @(
@@ -30,7 +21,6 @@ $apps = @(
     "Microsoft.BingWeather"
     #"Microsoft.FreshPaint"
     "Microsoft.GamingServices"
-    "Microsoft.Microsoft3DViewer"
     "Microsoft.MicrosoftOfficeHub"
     "Microsoft.MicrosoftPowerBIForWindows"
     "Microsoft.MicrosoftSolitaireCollection"
@@ -50,11 +40,10 @@ $apps = @(
     "Microsoft.WindowsMaps"
     "Microsoft.WindowsPhone"
     "Microsoft.WindowsSoundRecorder"
-    #"Microsoft.WindowsStore"
+    #"Microsoft.WindowsStore"   # can't be re-installed
     "Microsoft.Xbox.TCUI"
     "Microsoft.XboxApp"
     "Microsoft.XboxGameOverlay"
-    "Microsoft.XboxGamingOverlay"
     "Microsoft.XboxSpeechToTextOverlay"
     "Microsoft.YourPhone"
     "Microsoft.ZuneMusic"
@@ -84,7 +73,6 @@ $apps = @(
     "Microsoft.MixedReality.Portal"
     "Microsoft.ScreenSketch"
     "Microsoft.XboxGamingOverlay"
-    "Microsoft.YourPhone"
 
     # non-Microsoft
     "2FE3CB00.PicsArt-PhotoStudio"
@@ -128,25 +116,55 @@ $apps = @(
     "king.com.CandyCrushSaga"
     "king.com.CandyCrushSodaSaga"
 
+    # apps which cannot be removed using Remove-AppxPackage
+    #"Microsoft.BioEnrollment"
+    #"Microsoft.MicrosoftEdge"
+    #"Microsoft.Windows.Cortana"
+    #"Microsoft.WindowsFeedback"
+    #"Microsoft.XboxGameCallableUI"
+    #"Microsoft.XboxIdentityProvider"
+    #"Windows.ContactSupport"
+
     # apps which other apps depend on
     "Microsoft.Advertising.Xaml"
 )
 
+$appxprovisionedpackage = Get-AppxProvisionedPackage -Online
+
 foreach ($app in $apps) {
     Write-Output "Trying to remove $app"
 
-    # Get the app version
-    $appVersion = (Get-AppxPackage -Name $app).Version 
+    Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers
 
-    If ($appVersion){ 
-      # If the apps is found, remove it
-      Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers
-    }
-    
-    # Remove the app from the local Windows Image to prevent re-install on new user accounts
-    Get-AppXProvisionedPackage -Online | Where-Object DisplayName -EQ $app | Remove-AppxProvisionedPackage -Online
-
-    # Cleanup Local App Data
-    $appPath="$Env:LOCALAPPDATA\Packages\$app*"
-    Remove-Item $appPath -Recurse -Force -ErrorAction 0
+    ($appxprovisionedpackage).Where( {$_.DisplayName -EQ $app}) |
+        Remove-AppxProvisionedPackage -Online
 }
+
+# Prevents Apps from re-installing
+$cdm = @(
+    "ContentDeliveryAllowed"
+    "FeatureManagementEnabled"
+    "OemPreInstalledAppsEnabled"
+    "PreInstalledAppsEnabled"
+    "PreInstalledAppsEverEnabled"
+    "SilentInstalledAppsEnabled"
+    "SubscribedContent-314559Enabled"
+    "SubscribedContent-338387Enabled"
+    "SubscribedContent-338388Enabled"
+    "SubscribedContent-338389Enabled"
+    "SubscribedContent-338393Enabled"
+    "SubscribedContentEnabled"
+    "SystemPaneSuggestionsEnabled"
+)
+
+New-FolderForced -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+foreach ($key in $cdm) {
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" $key 0
+}
+
+New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\WindowsStore" "AutoDownload" 2
+
+# Prevents "Suggested Applications" returning
+New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" "DisableWindowsConsumerFeatures" 1
