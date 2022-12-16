@@ -50,6 +50,7 @@
         "list": 
         [
             {
+                "backgroundImage": "C:\\Users\\deivids\\OneDrive\\Pictures\\Saved Pictures\\white-rose.jpg",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
@@ -67,7 +68,7 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "backgroundImage": "C:\\Users\\deivids\\OneDrive\\Pictures\\Saved Pictures\\carlos-quintero-hAb_8YM2kJw-unsplash.jpg",
+                "backgroundImage": "C:\\Users\\deivids\\OneDrive\\Pictures\\Saved Pictures\\pink-rose.jpg",
                 "colorScheme": "Ubuntu-22.04-ColorScheme",
                 "cursorShape": "bar",
                 "experimental.retroTerminalEffect": false,
