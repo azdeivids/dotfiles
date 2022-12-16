@@ -36,12 +36,15 @@
     {
         "defaults": 
         {
+            "backgroundImage": "desktopWallpaper",
+            "backgroundImageOpacity": 0.050000000000000003,
             "colorScheme": "One Half Dark (mod)",
+            "elevate": true,
             "font": 
             {
                 "face": "Hack Nerd Font"
             },
-            "opacity": 100,
+            "opacity": 80,
             "useAcrylic": true
         },
         "list": 
@@ -64,6 +67,7 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
+                "backgroundImage": "C:\\Users\\deivids\\OneDrive\\Pictures\\Saved Pictures\\carlos-quintero-hAb_8YM2kJw-unsplash.jpg",
                 "colorScheme": "Ubuntu-22.04-ColorScheme",
                 "cursorShape": "bar",
                 "experimental.retroTerminalEffect": false,
@@ -94,6 +98,7 @@
                 "name": "Kali-Kex"
             },
             {
+                "backgroundImage": "C:\\Users\\deivids\\OneDrive\\Pictures\\Saved Pictures\\kali-linux-background.jpg",
                 "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
                 "hidden": false,
                 "name": "kali-linux",
