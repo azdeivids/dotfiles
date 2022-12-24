@@ -1,0 +1,5 @@
+alias tf='terraform'
+alias g='git'
+alias d='docker'
+alias k='kubectl'
+alias cls='clear'
