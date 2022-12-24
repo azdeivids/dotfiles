@@ -1,0 +1,19 @@
+[user]
+	name = deivids
+	email = deivids.egle@gmail.com
+[init]
+	defaultBranch = main
+[merge]
+	tool = p4merge
+[merrgetool "p4merge"]
+	path = C:/Program Files/Perforce/p4merge.exe
+[mergetool]
+	prompt = false	
+[alias]
+	hist = log --all --oneline --graph --decorate
+[diff]
+	tool = p4merge
+[difftool "p4merge"]
+	path = C:/Program Files/Perforce/p4merge.exe
+[difftool]
+	prompt = false
