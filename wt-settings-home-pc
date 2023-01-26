@@ -4,8 +4,8 @@
     "actions": 
     [
         {
-            "command": "paste",
-            "keys": "ctrl+v"
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": 
@@ -16,8 +16,8 @@
             "keys": "ctrl+c"
         },
         {
-            "command": "find",
-            "keys": "ctrl+shift+f"
+            "command": "paste",
+            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -32,6 +32,7 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "minimizeToNotificationArea": true,
     "profiles": 
     {
         "defaults": 
@@ -39,7 +40,7 @@
             "backgroundImage": "desktopWallpaper",
             "backgroundImageOpacity": 0.050000000000000003,
             "colorScheme": "One Half Dark (mod)",
-            "elevate": true,
+            "elevate": false,
             "font": 
             {
                 "face": "Hack Nerd Font"
@@ -80,23 +81,11 @@
                 "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
             },
             {
-                "guid": "{de32b675-0d35-517f-8b19-536ed3b42a97}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{8dd3e39e-d8dd-570d-b142-60365a648e66}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
                 "commandline": "wsl -d kali-linux kex --wtstart -s",
-                "guid": "{f0ad79db-e5d0-531c-b855-a8c1c1054845}",
+                "guid": "{aac5da34-af36-5fd2-9dc3-6369894df31a}",
                 "hidden": false,
                 "icon": "file:///c:/users/deivids/onedrive/pictures/.icons/kali-kex.png",
-                "name": "Kali-Kex"
+                "name": "GUI kali-linux"
             },
             {
                 "backgroundImage": "C:\\Users\\deivids\\OneDrive\\Pictures\\Saved Pictures\\kali-linux-background.jpg",
@@ -109,6 +98,12 @@
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell"
+            },
+            {
+                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
+                "hidden": true,
+                "name": "Visual Studio Debug Console",
+                "source": "VSDebugConsole"
             }
         ]
     },
@@ -368,6 +363,7 @@
             "yellow": "#808000"
         }
     ],
+    "startOnUserLogin": true,
     "theme": "dark",
     "useAcrylicInTabRow": true
 }
