@@ -115,8 +115,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-eval "$(starship init bash)"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-export STARSHIP_DISTRO="🔱 $USER "
+
+eval "$(oh-my-posh init bash)"
+eval "$(oh-my-posh init bash --config /mnt/c/Users/deivids/.config/oh-my-posh/mad-theme.omp.json)"
 complete -C /usr/bin/terraform terraform
 complete -o default -F __start_kubectl k
