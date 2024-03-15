@@ -1,0 +1,10 @@
+{
+    "workbench.startupEditor": "none",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.fontFamily": "Hack Nerd Font, Hack NF",
+    "workbench.sideBar.location": "right",
+    "editor.snippetSuggestions": "top",
+    "editor.linkedEditing": true,
+    "workbench.colorTheme": "SynthWave '84",
+    "terminal.integrated.fontFamily": "Hack NF, Hack Nerd Font"
+}
