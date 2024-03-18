@@ -1,0 +1,13 @@
+{
+    "workbench.colorTheme": "SynthWave '84",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.snippetSuggestions": "top",
+    "editor.linkedEditing": true,
+    "editor.fontFamily": "MesloLGS Nerd Font Mono",
+    "workbench.sideBar.location": "right",
+    "powershell.powerShellAdditionalExePaths": {
+        "Shell": "/opt/homebrew/bin/pwsh"
+    },
+    "powershell.integratedConsole.showOnStartup": false,
+    "workbench.startupEditor": "none"
+}
